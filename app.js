@@ -18,5 +18,14 @@ db();
 app.use("/posts", postRoute);
 app.use("/comments", commentRoute);
 
+//에러
+app.use((err, req, res) => {
+  res.status(400).send({ message: "데이터 형식이 올바르지 않습니다." });
+});
+
+app.use((err, req, res) => {
+  res.status(404).send({ message: "게시글 조회에 실패하였습니다." });
+});
+
 const { PORT } = process.env;
 app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
