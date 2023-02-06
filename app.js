@@ -14,6 +14,7 @@ app.use(express.json());
 //서버,db연결
 db();
 
+//연결
 app.use("/posts", postRoute);
 app.use("/comments", commentRoute);
 
