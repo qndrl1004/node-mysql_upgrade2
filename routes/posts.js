@@ -4,13 +4,9 @@ const postRoute = express.Router();
 
 //게시글 작성
 postRoute.post("/", async (req, res) => {
-  if (req.body === undefined || Object.keys(req.body).length === 0) {
-    return res.json({ message: "데이터 형식이 올바르지 않습니다." });
-  }
-
-  const { user, password, title, content } = req.body;
-
   try {
+    const { user, password, title, content } = req.body;
+
     const createdPosts = await postModel.create({
       user,
       password,
@@ -18,7 +14,7 @@ postRoute.post("/", async (req, res) => {
       content,
     });
 
-    res.json({ postReturn: createdPosts, message: "게시글을 생성하였습니다." });
+    res.json({ message: "게시글을 생성하였습니다." });
   } catch (error) {
     res.json({ message: "데이터 형식이 올바르지 않습니다." });
   }
