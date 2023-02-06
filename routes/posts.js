@@ -4,26 +4,24 @@ const postRoute = express.Router();
 
 //게시글 작성
 postRoute.post("/", async (req, res) => {
-  try {
-    const { user, password, title, content } = req.body;
+  const { user, password, title, content } = req.body;
 
-    const createdPosts = await postModel.create({
-      user,
-      password,
-      title,
-      content,
-    });
+  const createdPosts = await postModel.create({
+    user,
+    password,
+    title,
+    content,
+  });
 
-    res.json({ message: "게시글을 생성하였습니다." });
-  } catch (error) {
-    res.json({ message: "데이터 형식이 올바르지 않습니다." });
-  }
+  res.json({ message: "게시글을 생성하였습니다." });
 });
 
 //게시글 조회
 postRoute.get("/", async (req, res) => {
   const selectcollect = await postModel.find({});
+
   const arr = [];
+
   for (let i = 0; i < selectcollect.length; i++) {
     const temp = {
       postId: selectcollect[i]._id,
@@ -55,19 +53,20 @@ postRoute.get("/:_postId", async (req, res) => {
 });
 
 //게시글 수정
-postRoute.put("/:_postId", async (req, res, next) => {
+postRoute.put("/:_postId", async (req, res) => {
   const { _postId } = req.params;
-  const { password, title, content } = req.body;
-  const repair = await postModel.findOneAndUpdate(
-    { _postId: req.params._id },
-    {
-      password: req.body.password,
-      title: req.body.title,
-      content: req.body.content,
-    },
-    { new: true }
-  );
-  res.json({ message: "게시글을 수정하였습니다." });
+  const selectId = await postModel.findById(_postId);
+  if (_postId === selectId.id) {
+    const repair = await postModel.findOneAndUpdate(
+      { _postId: req.params },
+      {
+        password: req.body.password,
+        title: req.body.title,
+        content: req.body.content,
+      }
+    );
+    res.json({ message: "게시글을 수정하였습니다." });
+  }
 });
 
 // 게시글 삭제
