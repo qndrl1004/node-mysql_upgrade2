@@ -28,7 +28,7 @@ commentRoute.get("/:_postId", async (req, res) => {
   const arr = [];
   for (let i = 0; i < selectcollect.length; i++) {
     const temp = {
-      postId: selectcollect[i].postId,
+      commnetId: selectcollect[i]._id,
       user: selectcollect[i].user,
       content: selectcollect[i].content,
       createdAt: selectcollect[i].createdAt,
