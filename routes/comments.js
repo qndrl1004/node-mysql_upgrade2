@@ -7,7 +7,7 @@ commentRoute.post("/:_postId", async (req, res) => {
   const { _postId } = req.params;
   const { user, password, content } = req.body;
 
-  const createdComment = await commentModel.create({
+  await commentModel.create({
     postId: _postId,
     user,
     password,
@@ -22,28 +22,25 @@ commentRoute.post("/:_postId", async (req, res) => {
 //댓글 목록 조회
 commentRoute.get("/:_postId", async (req, res) => {
   const { _postId } = req.params;
-
-  const selectcollect = await commentModel.find({ postId: { $eq: _postId } });
-
+  const selectcollect = await commentModel.find({ postId: _postId });
   const arr = [];
   for (let i = 0; i < selectcollect.length; i++) {
     const temp = {
-      commnetId: selectcollect[i]._id,
+      commentId: selectcollect[i]._id,
       user: selectcollect[i].user,
       content: selectcollect[i].content,
       createdAt: selectcollect[i].createdAt,
     };
     arr.push(temp);
   }
-
-  res.json({ data: [...arr] });
+  res.json({ data: [arr] });
 });
 
 //댓글 수정
 commentRoute.put("/:_commentId", async (req, res) => {
   const { _commentId } = req.params;
   const selectId = await commentModel.findById(_commentId);
-  if (_commentId === selectId.id) {
+  if (selectId) {
     const repair = await commentModel.findOneAndUpdate(
       { _commentId: req.params },
       {
