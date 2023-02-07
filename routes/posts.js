@@ -5,8 +5,7 @@ const postRoute = express.Router();
 //게시글 작성
 postRoute.post("/", async (req, res) => {
   const { user, password, title, content } = req.body;
-
-  const createdPosts = await postModel.create({
+  await postModel.create({
     user,
     password,
     title,
@@ -38,9 +37,7 @@ postRoute.get("/", async (req, res) => {
 //게시글 상세 조회
 postRoute.get("/:_postId", async (req, res) => {
   const { _postId } = req.params;
-
   const selectDetail = await postModel.findById(_postId);
-
   const temp = {
     postId: selectDetail._id,
     user: selectDetail.user,
@@ -48,7 +45,6 @@ postRoute.get("/:_postId", async (req, res) => {
     content: selectDetail.content,
     createdAt: selectDetail.createdAt,
   };
-
   res.json({ data: [temp] });
 });
 
@@ -56,8 +52,8 @@ postRoute.get("/:_postId", async (req, res) => {
 postRoute.put("/:_postId", async (req, res) => {
   const { _postId } = req.params;
   const selectId = await postModel.findById(_postId);
-  if (_postId === selectId.id) {
-    const repair = await postModel.findOneAndUpdate(
+  if (selectId) {
+    await postModel.findOneAndUpdate(
       { _postId: req.params },
       {
         password: req.body.password,
