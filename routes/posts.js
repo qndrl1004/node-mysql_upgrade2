@@ -50,19 +50,19 @@ postRoute.get("/:_postId", async (req, res) => {
 
 //게시글 수정
 postRoute.put("/:_postId", async (req, res) => {
-  const { _postId } = req.params;
-  const selectId = await postModel.findById(_postId);
-  if (selectId) {
-    await postModel.findOneAndUpdate(
-      { _postId: req.params },
-      {
-        password: req.body.password,
-        title: req.body.title,
-        content: req.body.content,
-      }
-    );
-    res.json({ message: "게시글을 수정하였습니다." });
-  }
+  const { password, title, content } = req.body;
+  await postModel.findByIdAndUpdate(
+    req.params._postId,
+    {
+      password: password,
+      title: title,
+      content: content,
+    },
+    {
+      new: true,
+    }
+  );
+  res.json({ message: "게시글을 수정하였습니다." });
 });
 
 // 게시글 삭제

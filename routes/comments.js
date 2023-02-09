@@ -38,18 +38,18 @@ commentRoute.get("/:_postId", async (req, res) => {
 
 //댓글 수정
 commentRoute.put("/:_commentId", async (req, res) => {
-  const { _commentId } = req.params;
-  const selectId = await commentModel.findById(_commentId);
-  if (selectId) {
-    const repair = await commentModel.findOneAndUpdate(
-      { _commentId: req.params },
-      {
-        password: req.body.password,
-        content: req.body.content,
-      }
-    );
-    res.json({ message: "댓글을 수정하였습니다." });
-  }
+  const { password, content } = req.body;
+  await commentModel.findByIdAndUpdate(
+    req.params._commentId,
+    {
+      password: password,
+      content: content,
+    },
+    {
+      new: true,
+    }
+  );
+  res.json({ message: "댓글을 수정하였습니다." });
 });
 
 // 댓글 삭제
