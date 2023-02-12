@@ -17,7 +17,9 @@ const validateCredential = [
   validate,
 ];
 
+//회원가입
+router.post("/", validateCredential, authController.signup);
 //로그인
-router.post("/", validateCredential, authController.login);
+router.post("/login", authController.login);
 
 export default router;
