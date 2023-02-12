@@ -41,11 +41,15 @@ export async function login(req, res) {
   const { nickname, password } = req.body;
   const user = await userRepository.findByUsername(nickname);
   if (!user) {
-    return res.json({ errorMessage: "닉네임,패스워드를 확인해주세요." });
+    return res
+      .status(412)
+      .json({ errorMessage: "닉네임 또는 패스워드를 확인해주세요." });
   }
   const isValidPassword = await user.password.includes(password);
   if (!isValidPassword) {
-    return res.json({ errorMessage: "닉네임,패스워드를 확인해주세요." });
+    return res
+      .status(412)
+      .json({ errorMessage: "닉네임 또는 패스워드를 확인해주세요." });
   }
   //토큰처리
   const crtoken = createJwtToken(user.userId);
