@@ -1,14 +1,14 @@
 {
   "name": "homework2",
   "version": "1.0.0",
-  "description": "twitter clone coding - simple version",
+  "description": "homework version2",
   "main": "app.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app"
   },
-  "author": "Dream Coding Academy",
+  "author": "wjdqndrl",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
