@@ -23,7 +23,7 @@ export async function signup(req, res) {
       .status(412)
       .json({ errorMessage: "패스워드가 일치하지 않습니다." });
   }
-  if (password === nickname) {
+  if (password.search(nickname) > -1) {
     return res
       .status(412)
       .json({ errorMessage: "패스워드에 닉네임이 포함되어 있습니다." });
