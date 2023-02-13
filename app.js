@@ -19,7 +19,6 @@ const connection = process.env;
 
 //미들웨어연결
 app.use("/posts", postRoute);
-// app.use("/signup", authRoute);
 app.use("/", authRoute);
 
 //db연결
