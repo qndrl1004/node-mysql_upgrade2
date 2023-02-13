@@ -76,7 +76,9 @@ export async function create(content, title, userId) {
 export async function getAll() {
   return Posts.findAll({ ...INCLUDE_USER, ...ORDER_DESC });
 }
-
+export async function findByUsername(nickname) {
+  return User.findOne({ where: { nickname: nickname } });
+}
 //게시글 상세찾기
 export async function getById(postId) {
   return Posts.findOne({

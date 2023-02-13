@@ -19,7 +19,7 @@ export async function createPost(req, res) {
 export async function getAllPost(req, res, next) {
   const nickname = req.query.nickname;
   const data = await (nickname
-    ? postRepository.getAllByUsername(nickname)
+    ? postRepository.findByUsername(nickname)
     : postRepository.getAll());
   res.status(200).json({ post: [data] });
 }
