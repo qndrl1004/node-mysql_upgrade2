@@ -1,6 +1,7 @@
 import { validationResult } from "express-validator";
 import { body } from "express-validator";
 
+//닉네임 패스워드 검사
 const validateCredential = [
   body("nickname")
     .trim()
