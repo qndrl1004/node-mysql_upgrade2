@@ -16,16 +16,13 @@ export async function createPost(req, res) {
 }
 
 //게시글 조회
-export async function getAllPost(req, res, next) {
-  const nickname = req.query.nickname;
-  const data = await (nickname
-    ? postRepository.findByUsername(nickname)
-    : postRepository.getAll());
+export async function getAllPost(req, res) {
+  const data = await postRepository.getAll();
   res.status(200).json({ post: [data] });
 }
 
 //게시글 상세조회
-export async function getAllByIdPost(req, res, next) {
+export async function getAllByIdPost(req, res) {
   const { postId } = req.params;
   const findId = await postRepository.getById(postId);
   if (findId !== null) {

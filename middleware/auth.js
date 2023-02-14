@@ -31,8 +31,6 @@ export const isAuth = async (req, res, next) => {
     //토큰의 아이디가 실제 db에 있는지 확인
     const decodedToken = jwt.decode(authToken);
     const test = await User.findByPk(decodedToken.userId);
-    console.log(decodedToken);
-    console.log(test);
     if (test == null) {
       return res
         .status(403)
@@ -40,7 +38,6 @@ export const isAuth = async (req, res, next) => {
     }
     next();
   } catch (err) {
-    console.error(err);
     res.status(401).send({
       errorMessage: "로그인 후 이용 가능한 기능입니다.",
     });
