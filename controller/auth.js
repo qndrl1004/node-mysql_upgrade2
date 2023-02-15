@@ -7,16 +7,12 @@ dotenv.config();
 export async function signup(req, res) {
   const { nickname, password, confirm } = req.body;
   //조건식
-  const rex = /[a-z][A-Z][0-9]/gi;
+  const rex = /^[a-zA-Z0-9]{4,20}$/;
   const nicknameCheck = rex.test(nickname);
   if (!nicknameCheck) {
     return res
       .status(412)
       .json({ errorMessage: "닉네임의 형식이 일치하지 않습니다." });
-  }
-  const found = await userRepository.findByUsername(nickname);
-  if (found != null) {
-    return res.status(412).json({ errorMessage: "아이디가 중복입니다." });
   }
   if (password !== confirm) {
     return res
@@ -27,6 +23,10 @@ export async function signup(req, res) {
     return res
       .status(412)
       .json({ errorMessage: "패스워드에 닉네임이 포함되어 있습니다." });
+  }
+  const found = await userRepository.findByUsername(nickname);
+  if (found != null) {
+    return res.status(412).json({ errorMessage: "아이디가 중복입니다." });
   }
   await userRepository.createUser({
     nickname,
