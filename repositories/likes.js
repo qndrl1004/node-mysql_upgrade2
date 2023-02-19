@@ -15,11 +15,11 @@ class LikeRepository {
   };
 
   likeCreate = async (postId, userId) => {
-    Likes.create({ postPostId: postId, userUserId: userId });
+    return Likes.create({ postPostId: postId, userUserId: userId });
   };
 
   likeDelete = async (postId, userId) => {
-    Likes.destroy({
+    return Likes.destroy({
       where: { postPostId: postId, userUserId: userId },
     });
   };
