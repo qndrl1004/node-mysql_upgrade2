@@ -7,19 +7,19 @@ class LikeRepository {
   };
 
   likeSearch = async (postId) => {
-    return Posts.findByPk(postId);
+    return await Posts.findByPk(postId);
   };
 
   likeCheck = async (postId) => {
-    return Likes.findOne({ postPostId: postId });
+    return await Likes.findOne({ postPostId: postId });
   };
 
   likeCreate = async (postId, userId) => {
-    return Likes.create({ postPostId: postId, userUserId: userId });
+    return await Likes.create({ postPostId: postId, userUserId: userId });
   };
 
   likeDelete = async (postId, userId) => {
-    return Likes.destroy({
+    return await Likes.destroy({
       where: { postPostId: postId, userUserId: userId },
     });
   };
