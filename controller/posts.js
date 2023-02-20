@@ -8,7 +8,7 @@ class PostController {
   };
 
   getAllPost = async (_, res) => {
-    return await this.postService.getAllPostService(res);
+    return await this.postService.getAllPostService(_, res);
   };
 
   getAllByIdPost = async (req, res) => {

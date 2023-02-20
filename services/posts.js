@@ -13,7 +13,7 @@ class PostService {
     return res.status(201).json({ message: "게시글 작성에 성공하였습니다." });
   };
 
-  getAllPostService = async (res) => {
+  getAllPostService = async (_, res) => {
     const data = await this.postRepository.getAll();
     return res.status(200).json({ post: [data] });
   };

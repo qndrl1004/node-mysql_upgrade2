@@ -8,7 +8,7 @@ class CommentController {
   };
 
   getAllComment = async (_, res) => {
-    return await this.commentService.getAllCommentService(res);
+    return await this.commentService.getAllCommentService(_, res);
   };
 
   updateComment = async (req, res) => {

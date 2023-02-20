@@ -4,7 +4,7 @@ class LikeController {
   likeService = new LikeService();
 
   getAllLike = async (_, res) => {
-    return await this.likeService.getAllLikeService(res);
+    return await this.likeService.getAllLikeService(_, res);
   };
 
   updateLike = async (req, res) => {

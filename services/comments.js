@@ -13,7 +13,7 @@ class CommentService {
     return res.status(201).json({ message: "댓글 작성에 성공하였습니다." });
   };
 
-  getAllCommentService = async (res) => {
+  getAllCommentService = async (_, res) => {
     const data = await this.commentRepository.commentGetAll();
     return res.status(200).json({ comments: [data] });
   };
