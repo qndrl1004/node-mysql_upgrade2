@@ -20,7 +20,7 @@ class PostController {
   };
 
   deletePost = async (req, res) => {
-    await this.postSelvice.deletePostService(req, res);
+    return await this.postSelvice.deletePostService(req, res);
   };
 }
 
