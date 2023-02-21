@@ -21,7 +21,7 @@ app.use("/", authRoute);
 app.use("/posts", postRoute);
 app.use("/posts/:postId", commentRoute);
 
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync().then(() => {
   console.log(`Server connecting on mysql`);
 });
 

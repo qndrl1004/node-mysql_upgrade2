@@ -7,12 +7,12 @@ export const Likes = sequelize.define(
   "likes",
   {
     likeId: {
-      allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER,
+      allowNull: false,
     },
   },
-  { timestamps: true }
+  { timestamps: false }
 );
 Likes.belongsTo(User);

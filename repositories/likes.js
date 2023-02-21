@@ -1,3 +1,4 @@
+import { where } from "sequelize";
 import { Likes } from "../models/likes.js";
 import { Posts, LIKE_COUNT } from "../models/posts.js";
 
@@ -10,8 +11,10 @@ class LikeRepository {
     return await Posts.findByPk(postId);
   };
 
-  likeCheck = async (postId) => {
-    return await Likes.findOne({ postPostId: postId });
+  likeCheck = async (postId, userId) => {
+    return await Likes.findOne({
+      where: { postPostId: postId, userUserId: userId },
+    });
   };
 
   likeCreate = async (postId, userId) => {
