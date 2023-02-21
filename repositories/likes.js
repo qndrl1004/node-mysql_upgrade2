@@ -1,4 +1,3 @@
-import { where } from "sequelize";
 import { Likes } from "../models/likes.js";
 import { Posts, LIKE_COUNT } from "../models/posts.js";
 

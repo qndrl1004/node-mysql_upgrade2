@@ -1,4 +1,4 @@
-import SQ, { BelongsTo } from "sequelize";
+import SQ from "sequelize";
 import { sequelize } from "../db/database.js";
 import { User } from "./auth.js";
 const DataTypes = SQ.DataTypes;
