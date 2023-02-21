@@ -15,7 +15,7 @@ class CommentService {
 
   getAllCommentService = async (_, res) => {
     const data = await this.commentRepository.commentGetAll();
-    return res.status(200).json({ comments: [data] });
+    return res.status(200).json({ comments: data });
   };
 
   updateCommentService = async (req, res) => {
